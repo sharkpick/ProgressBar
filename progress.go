@@ -2,8 +2,6 @@ package progressbar
 
 import (
 	"fmt"
-	"math"
-	"strings"
 	"time"
 )
 
@@ -14,24 +12,6 @@ type Progress interface {
 	String() string
 	// will return the progress as a percent representation of the current progress
 	ProgressPercent() float64
-}
-
-// construct the progress bar from a given progress report
-func ConstructBar(progress Progress) string {
-	results := strings.Builder{}
-	results.Grow(125)
-	results.WriteByte('[')
-	currentProgress := int(math.Floor(progress.ProgressPercent())) / 2
-	max := 50
-	for i := 0; i < int(currentProgress); i++ {
-		results.WriteByte('|')
-	}
-	for i := int(currentProgress); i < max; i++ {
-		results.WriteByte(' ')
-	}
-	results.WriteByte(']')
-	results.WriteString(fmt.Sprintf(" %s", progress.String()))
-	return results.String()
 }
 
 // float-only progress

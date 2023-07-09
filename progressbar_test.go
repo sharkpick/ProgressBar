@@ -13,7 +13,7 @@ func TestBasicProgress(t *testing.T) {
 	defer progressbar.Close()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	RenderProgress(ctx, progressbar)
+	progressbar.RenderProgress(ctx)
 	for i := 1; i <= 5; i++ {
 		progress := BasicProgress(float64(i) / float64(5))
 		progressbar.UpdateProgress(progress)
@@ -28,7 +28,7 @@ func TestProgressWithRemaining(t *testing.T) {
 	defer progressbar.Close()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	RenderProgress(ctx, progressbar)
+	progressbar.RenderProgress(ctx)
 	for i := 1; i <= 5; i++ {
 		progress := ProgressWithRemaining{
 			Progress:  float64(i) / float64(5),
@@ -46,7 +46,7 @@ func TestLongDuration(t *testing.T) {
 	defer progressbar.Close()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	RenderProgress(ctx, progressbar)
+	progressbar.RenderProgress(ctx)
 	for i := 1; i < 10000; i++ {
 		progress := BasicProgress(float64(i) / float64(10000))
 		progressbar.UpdateProgress(progress)
@@ -63,7 +63,7 @@ func TestShortDuration(t *testing.T) {
 	defer progressbar.Close()
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	RenderProgress(ctx, progressbar)
+	progressbar.RenderProgress(ctx)
 	for i := 0; i < 5000; i++ {
 		progress := BasicProgress(float64(i) / float64(5000))
 		progressbar.UpdateProgress(progress)
